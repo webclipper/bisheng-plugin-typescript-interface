@@ -1,0 +1,36 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependencies
+node_modules/
+
+# Coverage
+coverage
+
+# Transpiled files
+build/
+
+# VS Code
+.vscode
+!.vscode/tasks.js
+!.vscode/setting.json
+
+# JetBrains IDEs
+.idea/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Misc
+.DS_Store
+
+.nyc_output/
+
+lib/
+
+package-lock.json
