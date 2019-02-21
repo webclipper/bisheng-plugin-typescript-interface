@@ -1,4 +1,4 @@
-interface ITableConfig {
+export interface ITableConfig {
   filePath: string;
   interfaceName: string;
   columnNames?: string[];

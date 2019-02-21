@@ -16,7 +16,6 @@ export = (
       if (tagName === 'pre' && attr && attr.lang === lang) {
         parserTableConfig(node[2][1]);
       }
-
       return node;
     });
   }

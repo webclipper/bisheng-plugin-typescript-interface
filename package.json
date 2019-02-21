@@ -1,63 +1,49 @@
 {
   "name": "bisheng-plugin-typescript-interface",
   "version": "0.0.1",
-  "description": "phrase typescript interface",
+  "description": "transform typescript interface comment to document",
   "pre-commit": [
     "lint",
-    "test"
+    "cov"
   ],
-  "bin": "bin/index.js",
+  "files": [
+    "lib"
+  ],
+  "egg": {
+    "typescript": true
+  },
   "devDependencies": {
     "@types/node": "~10",
-    "codecov": "^3.1.0",
+    "@types/power-assert": "^1.5.0",
     "commitizen": "^3.0.4",
     "cz-conventional-changelog": "^2.1.0",
-    "jest": "^23.6.0",
+    "egg-ts-helper": "^1.22.1",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.15.3",
     "rimraf": "~2.6.2",
-    "ts-loader": "^5.3.0",
-    "ts-node": "^7.0.1",
-    "tslint": "~5.11.0",
-    "tslint-config-prettier": "1.15.0",
-    "tslint-microsoft-contrib": "~5.2.1",
+    "tslint": "^5.12.1",
     "typescript": "~3.1.0"
   },
   "scripts": {
     "commit": "git-cz",
-    "clean": "rimraf coverage build tmp lib .nyc_output",
+    "clean": "rimraf lib dist coverage",
     "dev": "yarn clean && tsc --watch",
-    "build": "yarn clean && tsc --build tsconfig.build.json",
-    "lint": "tslint -t stylish --project \"tsconfig.json\"",
-    "test": "nyc jest",
-    "test:watch": "nyc jest --watch",
-    "ci": "yarn clean && yarn lint && yarn test && tsc --build tsconfig.build.json",
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+    "test": " egg-bin test",
+    "tsc": " tsc --build tsconfig.build.json",
+    "build": "npm run clean && npm run tsc",
+    "lint": "tslint --project tsconfig.json",
+    "cov": "egg-bin cov",
+    "ci": "yarn lint && npm run cov && tsc  --build tsconfig.build.json"
   },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
     }
   },
-  "nyc": {
-    "extension": [
-      ".js",
-      ".jsx",
-      ".ts",
-      ".tsx"
-    ],
-    "include": [
-      "src/**/!(*.test.*).[tj]s?(x)"
-    ],
-    "require": [
-      "ts-node/register"
-    ]
-  },
   "author": "DiamondYuan",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "dependencies": {
     "@types/jest": "~23.3.2",
-    "nyc": "^13.1.0",
-    "ts-jest": "~23.10.2"
+    "egg-bin": "^4.11.0",
+    "power-assert": "^1.6.1"
   }
 }
