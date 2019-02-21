@@ -1,9 +1,11 @@
-interface IFieldMeta {
-  base: {
-    [key: string]: string;
-  };
+interface IMeta {
+  [key: string]: string;
+}
+
+export interface IFieldMeta {
+  base: IMeta;
   i18n: {
-    [language: string]: IFieldMeta['base'];
+    [language: string]: IMeta;
   };
 }
 
@@ -37,19 +39,32 @@ interface IField {
   meta: IFieldMeta;
 }
 
-/**
- *
- * @param _ 用户字段的备注
- *
- * @param _ comments of field
- */
-export function transformCommentsToFieldMeta(_: string[]): IFieldMeta {
-  return {} as any;
+export function mergeFieldMeta(metaList: IMeta[]): IFieldMeta {
+  const result: IFieldMeta = {
+    base: {},
+    i18n: {}
+  };
+  if (!Array.isArray(metaList) || metaList.length === 0) {
+    return result;
+  }
+  for (const meta of metaList) {
+    const { language } = meta;
+    if (language) {
+      result.i18n[language] = Object.assign({}, result.i18n[language], meta);
+    } else {
+      result.base = Object.assign({}, result.base, meta);
+    }
+  }
+  return result;
 }
 
-export function parserComment(comment: string): IFieldMeta['base'] {
+export function getMetaByLanguage(meta: IFieldMeta, language?: string): IMeta {
+  return Object.assign({}, meta.base, meta.i18n[language]);
+}
+
+export function parserComment(comment: string): IMeta {
   const lines = comment.match(/@[a-z]* .*/g);
-  const result: IFieldMeta['base'] = {};
+  const result: IMeta = {};
   for (const line of lines) {
     const data = line.match(/@([a-z]*) (.*)/);
     if (data && data[2]) {
