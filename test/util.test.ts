@@ -26,7 +26,7 @@ describe('test utils', () => {
             columnNames: []
           })
         ).columnNames,
-        ['property', 'description', 'type', 'default', 'optional']
+        ['name', 'description', 'types', 'default', 'optional']
       );
     });
     it('should should be default value when columnNames is undefined', () => {
@@ -37,7 +37,7 @@ describe('test utils', () => {
             interfaceName: '2'
           })
         ).columnNames,
-        ['property', 'description', 'type', 'default', 'optional']
+        ['name', 'description', 'types', 'default', 'optional']
       );
     });
     it('should parse correct', () => {
@@ -46,13 +46,15 @@ describe('test utils', () => {
           JSON.stringify({
             filePath: '1',
             interfaceName: '2',
-            columnNames: ['1', '2']
+            columnNames: ['1', '2'],
+            language: '1'
           })
         ),
         {
           filePath: '1',
           interfaceName: '2',
-          columnNames: ['1', '2']
+          columnNames: ['1', '2'],
+          language: '1'
         }
       );
     });

@@ -1,6 +1,7 @@
 import {
   readInterfaceAstByName,
-  parserTsInterfaceDeclaration
+  parserTsInterfaceDeclaration,
+  getFieldMetaByLanguage
 } from '../../src/transform';
 import assert = require('power-assert');
 import * as path from 'path';
@@ -51,5 +52,63 @@ describe('test transform/index.ts', () => {
       )
     );
     assert.deepEqual(data.length, 5);
+  });
+
+  describe('test getFieldMetaByLanguage', () => {
+    it('h', () => {
+      assert.deepEqual(
+        getFieldMetaByLanguage(
+          {
+            name: 'one',
+            types: 'boolean',
+            optional: 'true'
+          },
+          'zh-CN'
+        ),
+        {
+          name: 'one',
+          types: 'boolean',
+          optional: 'true'
+        }
+      );
+    });
+
+    assert.deepEqual(
+      getFieldMetaByLanguage(
+        {
+          name: 'one',
+          types: 'boolean',
+          optional: 'true',
+          meta: {
+            base: {
+              baseData: 'baseData',
+              description: 'newDescription'
+            },
+            i18n: {
+              ['en-US']: {
+                language: 'en-US',
+                description: 'english description',
+                otherInfo: 'other info'
+              },
+              ['zh-CN']: {
+                language: 'zh-CN',
+                description: '中文信息',
+                otherInfo: '其他信息'
+              }
+            }
+          }
+        },
+        'zh-CN'
+      ),
+      {
+        name: 'one',
+        optional: 'true',
+        types: 'boolean',
+        baseData: 'baseData',
+        description: '中文信息',
+        language: 'zh-CN',
+        otherInfo: '其他信息'
+      }
+    );
   });
 });

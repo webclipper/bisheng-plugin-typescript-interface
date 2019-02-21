@@ -1,9 +1,5 @@
 import { IFieldMeta } from '../../src/transform/interface';
-import {
-  parserComment,
-  mergeFieldMeta,
-  getMetaByLanguage
-} from '../../src/transform/comment';
+import { parserComment, mergeFieldMeta } from '../../src/transform/comment';
 import assert = require('power-assert');
 
 /**
@@ -78,33 +74,6 @@ describe('test comment.ts', () => {
         mergeFieldMeta([baseMeta, chineseMeta, englishMeta, newMeta]),
         expectResult
       );
-    });
-
-    describe('test getMetaByLanguage', () => {
-      const result = mergeFieldMeta([
-        baseMeta,
-        chineseMeta,
-        englishMeta,
-        newMeta
-      ]);
-      it('should get base meta when language is undefined or error', () => {
-        assert.deepEqual(getMetaByLanguage(result), {
-          baseData: 'baseData',
-          description: 'newDescription'
-        });
-        assert.deepEqual(getMetaByLanguage(result, 'error'), {
-          baseData: 'baseData',
-          description: 'newDescription'
-        });
-      });
-      it('show merge meta when language is correct', () => {
-        assert.deepEqual(getMetaByLanguage(result, 'zh-CN'), {
-          baseData: 'baseData',
-          language: 'zh-CN',
-          description: '中文信息',
-          otherInfo: '其他信息'
-        });
-      });
     });
   });
 });

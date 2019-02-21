@@ -1,13 +1,14 @@
 export interface ITableConfig {
   filePath: string;
   interfaceName: string;
+  language: string;
   columnNames?: string[];
 }
 
 export function parserTableConfig(tableConfig: string): ITableConfig {
   const config: ITableConfig = JSON.parse(tableConfig);
 
-  const { filePath, interfaceName, columnNames } = config;
+  const { filePath, interfaceName, columnNames, language } = config;
 
   if (!filePath) {
     throw new Error('filePath is required');
@@ -19,10 +20,11 @@ export function parserTableConfig(tableConfig: string): ITableConfig {
   return {
     filePath,
     interfaceName,
+    language,
     columnNames:
       Array.isArray(columnNames) && columnNames.length > 0
         ? columnNames
-        : ['property', 'description', 'type', 'default', 'optional']
+        : ['name', 'description', 'types', 'default', 'optional']
   };
 }
 

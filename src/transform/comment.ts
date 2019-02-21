@@ -19,10 +19,6 @@ export function mergeFieldMeta(metaList: IMeta[]): IFieldMeta {
   return result;
 }
 
-export function getMetaByLanguage(meta: IFieldMeta, language?: string): IMeta {
-  return Object.assign({}, meta.base, meta.i18n[language]);
-}
-
 export function parserComment(comment: string): IMeta {
   const lines = comment.match(/@[a-z]* .*/g);
   const result: IMeta = {};

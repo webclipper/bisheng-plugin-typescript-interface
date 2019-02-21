@@ -13,7 +13,7 @@ export interface IField {
    * @language zh-CN
    * @description 字段是否可选(即有没有问号)
    */
-  optional: boolean;
+  optional: string;
 
   /**
    * @language zh-CN
@@ -25,7 +25,7 @@ export interface IField {
    * @language zh-CN
    * @description 字段信息，用户备注。
    */
-  meta: IFieldMeta;
+  meta?: IFieldMeta;
 }
 
 export interface IMeta {

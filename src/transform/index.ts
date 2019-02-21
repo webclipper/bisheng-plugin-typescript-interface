@@ -1,4 +1,4 @@
-import { IField } from './interface';
+import { IField, IMeta } from './interface';
 import { parse } from '@babel/parser';
 import {
   isTSInterfaceDeclaration,
@@ -46,11 +46,24 @@ export function parserTsInterfaceDeclaration(
       meta = mergeFieldMeta(leadingComments.map(o => parserComment(o.value)));
     }
     return {
-      optional: !!optional,
+      optional: optional ? 'true' : 'false',
       name: key.name,
       types: (generate(typeAnnotation).code as string).slice(2),
       meta
     };
   });
   return result.filter(o => !!o);
+}
+
+export function getFieldMetaByLanguage(field: IField, language: string): IMeta {
+  const { meta, name, optional, types } = field;
+  const baseInfo = {
+    name,
+    optional,
+    types
+  };
+  if (!meta) {
+    return baseInfo;
+  }
+  return Object.assign(baseInfo, meta.base, meta.i18n[language]);
 }
