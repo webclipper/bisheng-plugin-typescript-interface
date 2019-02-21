@@ -12,11 +12,6 @@ coverage
 # Transpiled files
 build/
 
-# VS Code
-.vscode
-!.vscode/tasks.js
-!.vscode/setting.json
-
 # JetBrains IDEs
 .idea/
 

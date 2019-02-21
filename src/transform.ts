@@ -43,14 +43,23 @@ interface IField {
  *
  * @param _ comments of field
  */
-function transformCommentsToFieldMeta(_: string[]): IFieldMeta {
+export function transformCommentsToFieldMeta(_: string[]): IFieldMeta {
   return {} as any;
 }
 
-function parserComment(_: string): IFieldMeta['base'] {
-  return {} as any;
+export function parserComment(comment: string): IFieldMeta['base'] {
+  const lines = comment.match(/@[a-z]* .*/g);
+  const result: IFieldMeta['base'] = {};
+  for (const line of lines) {
+    const data = line.match(/@([a-z]*) (.*)/);
+    if (data && data[2]) {
+      result[data[1]] = data[2].trim();
+    }
+  }
+
+  return result;
 }
 
-function transformer(_: string, __: string): IField[] {
+export function transformer(_: string, __: string): IField[] {
   return [];
 }
