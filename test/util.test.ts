@@ -26,7 +26,12 @@ describe('test utils', () => {
             columnNames: []
           })
         ).columnNames,
-        ['name', 'description', 'types', 'default', 'optional']
+        [
+          { label: 'Property', key: 'name' },
+          { label: 'Description', key: 'description' },
+          { label: 'Type', key: 'types' },
+          { label: 'Default', key: 'default' }
+        ]
       );
     });
     it('should should be default value when columnNames is undefined', () => {
@@ -37,7 +42,12 @@ describe('test utils', () => {
             interfaceName: '2'
           })
         ).columnNames,
-        ['name', 'description', 'types', 'default', 'optional']
+        [
+          { label: 'Property', key: 'name' },
+          { label: 'Description', key: 'description' },
+          { label: 'Type', key: 'types' },
+          { label: 'Default', key: 'default' }
+        ]
       );
     });
     it('should parse correct', () => {
@@ -46,14 +56,24 @@ describe('test utils', () => {
           JSON.stringify({
             filePath: '1',
             interfaceName: '2',
-            columnNames: ['1', '2'],
+            columnNames: [
+              { label: '属性', key: 'name' },
+              { label: '说明', key: 'description' },
+              { label: '类型', key: 'types' },
+              { label: '默认值', key: 'default' }
+            ],
             language: '1'
           })
         ),
         {
           filePath: '1',
           interfaceName: '2',
-          columnNames: ['1', '2'],
+          columnNames: [
+            { label: '属性', key: 'name' },
+            { label: '说明', key: 'description' },
+            { label: '类型', key: 'types' },
+            { label: '默认值', key: 'default' }
+          ],
           language: '1'
         }
       );
@@ -62,7 +82,11 @@ describe('test utils', () => {
 });
 
 describe('test jsonToMarkdownTable', () => {
-  let columns = ['a', 'b', 'c'];
+  let columns = [
+    { label: 'a', key: 'a' },
+    { label: 'b', key: 'b' },
+    { label: 'c', key: 'c' }
+  ];
 
   let rows = [
     {
