@@ -43,6 +43,9 @@
   "author": "DiamondYuan",
   "license": "MIT",
   "dependencies": {
+    "@babel/generator": "^7.3.3",
+    "@babel/parser": "^7.3.3",
+    "@babel/types": "^7.3.3",
     "@types/jest": "~23.3.2",
     "egg-bin": "^4.11.0",
     "power-assert": "^1.6.1"
