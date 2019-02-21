@@ -1,9 +1,9 @@
-import { IFieldMeta } from './../src/transform';
+import { IFieldMeta } from '../../src/transform/interface';
 import {
   parserComment,
   mergeFieldMeta,
   getMetaByLanguage
-} from '../src/transform';
+} from '../../src/transform/comment';
 import assert = require('power-assert');
 
 /**
@@ -11,7 +11,7 @@ import assert = require('power-assert');
  * @description disabled state of button
  * @empty
  */
-describe('test transform', () => {
+describe('test comment.ts', () => {
   describe('test parserComment', () => {
     const comment =
       '/**\n* @language   en-US  \n* @description  disabled state of button   \n* @empty \n*';
