@@ -52,6 +52,16 @@ describe('test transform/index.ts', () => {
       )
     );
     assert.deepEqual(data.length, 5);
+
+    describe('type should work correct with union type', () => {
+      const data = parserTsInterfaceDeclaration(
+        readInterfaceAstByName(
+          path.resolve(__dirname, './fixtures/fixtures.tsx'),
+          'TestUnionType'
+        )
+      );
+      assert.deepEqual(data[0].types, `'one' \\| 'two' \\| 'three'`);
+    });
   });
 
   describe('test getFieldMetaByLanguage', () => {

@@ -48,7 +48,10 @@ export function parserTsInterfaceDeclaration(
     return {
       optional: optional ? 'true' : 'false',
       name: key.name,
-      types: (generate(typeAnnotation).code as string).slice(2),
+      types: (generate(typeAnnotation).code as string)
+        .slice(2)
+        .replace(/\|/g, '\\|')
+        .replace(/\n/g, ''),
       meta
     };
   });

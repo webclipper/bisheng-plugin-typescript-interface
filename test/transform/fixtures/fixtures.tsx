@@ -46,7 +46,7 @@ interface ITestInterface {
    * @language zh-CN
    * @description 日期
    */
-  value?: 'one' | 'two';
+  value?: 'one' | 'two' | 'three';
 
   getContainer?: () => AnchorContainer;
 
@@ -61,4 +61,8 @@ interface ITestInterface {
   (source: string, subString: string): boolean;
 
   1: () => void;
+}
+
+interface TestUnionType {
+  value?: 'one' | 'two' | 'three';
 }
