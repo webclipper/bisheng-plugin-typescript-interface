@@ -22,6 +22,23 @@ export function parserTableConfig(tableConfig: string): ITableConfig {
     columnNames:
       Array.isArray(columnNames) && columnNames.length > 0
         ? columnNames
-        : ['property', 'description', 'type', 'default', 'optional'],
+        : ['property', 'description', 'type', 'default', 'optional']
   };
+}
+
+export function jsonToMarkdownTable(
+  rows: {
+    [column: string]: string;
+  }[],
+  columns: string[]
+) {
+  const result = [];
+  result.push(`|${columns.join(' | ')}|`);
+  result.push(`|${[...columns].fill('---').join('|')}|`);
+  for (const row of rows) {
+    result.push(
+      `|${columns.map(key => (row[key] ? row[key] : '-')).join('|')}|`
+    );
+  }
+  return result.join('\r\n');
 }
