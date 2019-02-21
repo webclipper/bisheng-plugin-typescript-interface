@@ -1,3 +1,5 @@
+type AnchorContainer = HTMLElement | Window;
+
 interface ITestInterface {
   /**
    * @default `false`
@@ -45,4 +47,6 @@ interface ITestInterface {
    * @description 日期
    */
   value: 'one' | 'two';
+
+  getContainer?: () => AnchorContainer;
 }

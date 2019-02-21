@@ -1,10 +1,11 @@
-import { readInterfaceAstByName } from '../../src/transform';
+import {
+  readInterfaceAstByName,
+  parserTsInterfaceDeclaration
+} from '../../src/transform';
 import assert = require('power-assert');
 import * as path from 'path';
 
 describe('test transform/index.ts', () => {
-  console.log();
-
   describe('test readInterfaceAstByName', () => {
     it('should return null when file not exist', () => {
       assert.equal(
@@ -25,6 +26,13 @@ describe('test transform/index.ts', () => {
       );
     });
     it('should get ast when input is correct', () => {
+      parserTsInterfaceDeclaration(
+        readInterfaceAstByName(
+          path.resolve(__dirname, './fixtures/fixtures.tsx'),
+          'ITestInterface'
+        )
+      );
+
       assert.notEqual(
         readInterfaceAstByName(
           path.resolve(__dirname, './fixtures/fixtures.tsx'),
@@ -33,5 +41,15 @@ describe('test transform/index.ts', () => {
         null
       );
     });
+  });
+
+  describe('test parserTsInterfaceDeclaration', () => {
+    const data = parserTsInterfaceDeclaration(
+      readInterfaceAstByName(
+        path.resolve(__dirname, './fixtures/fixtures.tsx'),
+        'ITestInterface'
+      )
+    );
+    assert.deepEqual(data.length, 5);
   });
 });
