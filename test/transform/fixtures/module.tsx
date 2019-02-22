@@ -59,3 +59,9 @@ export const localeProviderPropsFieldMeta: IField[] = [
     meta: undefined
   }
 ];
+
+export default class TestSupportClassProperties {
+  static propTypes = {
+    name: 'name'
+  };
+}
