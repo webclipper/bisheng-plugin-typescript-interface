@@ -89,7 +89,7 @@ describe('test transform/index.ts', () => {
   });
 
   describe('test getFieldMetaByLanguage', () => {
-    it('h', () => {
+    it('should work correct when meta is null', () => {
       assert.deepEqual(
         getFieldMetaByLanguage(
           {
