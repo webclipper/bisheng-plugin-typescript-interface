@@ -22,20 +22,18 @@ export function parserTableConfig(tableConfig: string): ITableConfig {
     throw new Error('interfaceName is required');
   }
 
-  return {
-    filePath,
-    interfaceName,
-    language,
-    columnNames:
-      Array.isArray(columnNames) && columnNames.length > 0
-        ? columnNames
-        : [
-            { label: 'Property', key: 'name' },
-            { label: 'Description', key: 'description' },
-            { label: 'Type', key: 'types' },
-            { label: 'Default', key: 'default' }
-          ]
-  };
+  const result: ITableConfig = { filePath, interfaceName, language };
+  if (Array.isArray(columnNames) && columnNames.length > 0) {
+    result.columnNames = columnNames;
+  } else {
+    result.columnNames = [
+      { label: 'Property', key: 'name' },
+      { label: 'Description', key: 'description' },
+      { label: 'Type', key: 'types' },
+      { label: 'Default', key: 'default' }
+    ];
+  }
+  return result;
 }
 
 export function jsonToMarkdownTable(

@@ -1,6 +1,6 @@
 {
   "name": "bisheng-plugin-typescript-interface",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "transform typescript interface comment to document",
   "pre-commit": [
     "lint",
@@ -30,16 +30,15 @@
   "scripts": {
     "commit": "git-cz",
     "clean": "rimraf lib dist coverage",
-    "dev": "yarn clean && tsc --watch",
+    "dev": "npm run clean && tsc --watch",
     "test-local": " egg-bin test",
     "debug": "egg-bin debug",
-    "tsc": " tsc --build tsconfig.build.json",
-    "build": "npm run clean && npm run tsc",
+    "build": "npm run clean && tsc --build tsconfig.build.json",
     "lint": "tslint --project tsconfig.json",
     "cov": "egg-bin cov",
-    "ci": "yarn lint && npm run cov && tsc  --build tsconfig.build.json",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "release": "yarn build && yarn publish"
+    "ci": "npm run lint && npm run cov && tsc  --build tsconfig.build.json",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
+    "pre-publish": "npm run changelog && npm run build"
   },
   "config": {
     "commitizen": {
