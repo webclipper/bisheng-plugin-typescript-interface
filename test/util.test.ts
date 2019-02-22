@@ -96,7 +96,7 @@ describe('test jsonToMarkdownTable', () => {
     },
     {
       a: 'sdf',
-      b: 'gsdf',
+      b: undefined,
       c: 'sfd'
     }
   ];
@@ -108,7 +108,7 @@ describe('test jsonToMarkdownTable', () => {
         '|a | b | c|',
         '|---|---|---|',
         '|asdfa|239487|234|',
-        '|sdf|gsdf|sfd|'
+        '|sdf|-|sfd|'
       ].join('\r\n')
     );
   });
