@@ -19,6 +19,7 @@ export function readInterfaceAstByName(
     return null;
   }
   const ast = parse(fs.readFileSync(filePath).toString(), {
+    sourceType: 'module',
     plugins: ['typescript']
   });
   for (let node of ast.program.body) {
