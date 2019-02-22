@@ -38,7 +38,8 @@
     "lint": "tslint --project tsconfig.json",
     "cov": "egg-bin cov",
     "ci": "yarn lint && npm run cov && tsc  --build tsconfig.build.json",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "release": "yarn build && yarn publish"
   },
   "config": {
     "commitizen": {
