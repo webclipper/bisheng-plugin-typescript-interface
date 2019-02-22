@@ -1,6 +1,6 @@
 {
   "name": "bisheng-plugin-typescript-interface",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "transform typescript interface comment to document",
   "pre-commit": [
     "lint",
@@ -13,9 +13,9 @@
     "typescript": true
   },
   "devDependencies": {
+    "@types/jest": "~23.3.2",
     "@types/node": "~10",
     "@types/power-assert": "^1.5.0",
-    "@types/jest": "~23.3.2",
     "commitizen": "^3.0.4",
     "conventional-changelog-cli": "^2.0.12",
     "cz-conventional-changelog": "^2.1.0",
