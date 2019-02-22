@@ -15,9 +15,13 @@
   "devDependencies": {
     "@types/node": "~10",
     "@types/power-assert": "^1.5.0",
+    "@types/jest": "~23.3.2",
     "commitizen": "^3.0.4",
+    "conventional-changelog-cli": "^2.0.12",
     "cz-conventional-changelog": "^2.1.0",
+    "egg-bin": "^4.11.0",
     "egg-ts-helper": "^1.22.1",
+    "power-assert": "^1.6.1",
     "pre-commit": "^1.2.2",
     "rimraf": "~2.6.2",
     "tslint": "^5.12.1",
@@ -34,7 +38,7 @@
     "lint": "tslint --project tsconfig.json",
     "cov": "egg-bin cov",
     "ci": "yarn lint && npm run cov && tsc  --build tsconfig.build.json",
-    "commits": "bash ./scripts/commits.sh"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
   "config": {
     "commitizen": {
@@ -47,9 +51,6 @@
     "@babel/generator": "^7.3.3",
     "@babel/parser": "^7.3.3",
     "@babel/types": "^7.3.3",
-    "@types/jest": "~23.3.2",
-    "egg-bin": "^4.11.0",
-    "mark-twain": "^2.0.3",
-    "power-assert": "^1.6.1"
+    "mark-twain": "^2.0.3"
   }
 }
