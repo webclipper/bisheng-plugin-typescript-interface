@@ -7,6 +7,9 @@ import assert = require('power-assert');
 import * as path from 'path';
 
 describe('test transform/index.ts', () => {
+  /**
+   * 测试从 ts 文件中根据接口名称提取语法树
+   */
   describe('test readInterfaceAstByName', () => {
     it('should return null when file not exist', () => {
       assert.equal(
@@ -26,14 +29,16 @@ describe('test transform/index.ts', () => {
         null
       );
     });
-    it('should get ast when input is correct', () => {
-      parserTsInterfaceDeclaration(
+    it('should support module', () => {
+      assert.notEqual(
         readInterfaceAstByName(
-          path.resolve(__dirname, './fixtures/fixtures.tsx'),
-          'ITestInterface'
-        )
+          path.resolve(__dirname, './fixtures/module.tsx'),
+          'Locale'
+        ),
+        null
       );
-
+    });
+    it('should get ast when input is correct', () => {
       assert.notEqual(
         readInterfaceAstByName(
           path.resolve(__dirname, './fixtures/fixtures.tsx'),
