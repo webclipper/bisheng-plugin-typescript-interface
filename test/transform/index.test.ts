@@ -1,3 +1,4 @@
+import { localeProviderPropsFieldMeta } from './fixtures/module';
 import {
   readInterfaceAstByName,
   parserTsInterfaceDeclaration,
@@ -29,6 +30,15 @@ describe('test transform/index.ts', () => {
         null
       );
     });
+    it('should support export exportNamedDeclaration', () => {
+      assert.notEqual(
+        readInterfaceAstByName(
+          path.resolve(__dirname, './fixtures/module.tsx'),
+          'LocaleProviderProps'
+        ),
+        null
+      );
+    });
     it('should support module', () => {
       assert.notEqual(
         readInterfaceAstByName(
@@ -50,6 +60,15 @@ describe('test transform/index.ts', () => {
   });
 
   describe('test parserTsInterfaceDeclaration', () => {
+    it('should support exportNamedDeclaration', () => {
+      const ast = readInterfaceAstByName(
+        path.resolve(__dirname, './fixtures/module.tsx'),
+        'LocaleProviderProps'
+      );
+      const fields = parserTsInterfaceDeclaration(ast);
+      assert.deepEqual(fields, localeProviderPropsFieldMeta);
+    });
+
     const data = parserTsInterfaceDeclaration(
       readInterfaceAstByName(
         path.resolve(__dirname, './fixtures/fixtures.tsx'),

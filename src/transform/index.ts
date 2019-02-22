@@ -5,7 +5,8 @@ import {
   TSInterfaceDeclaration,
   isTSPropertySignature,
   isTSMethodSignature,
-  isIdentifier
+  isIdentifier,
+  isExportNamedDeclaration
 } from '@babel/types';
 import * as fs from 'fs';
 import generate from '@babel/generator';
@@ -23,6 +24,9 @@ export function readInterfaceAstByName(
     plugins: ['typescript']
   });
   for (let node of ast.program.body) {
+    if (isExportNamedDeclaration(node)) {
+      node = node.declaration;
+    }
     if (isTSInterfaceDeclaration(node) && node.id.name === name) {
       return node;
     }
