@@ -33,7 +33,8 @@
     "build": "npm run clean && npm run tsc",
     "lint": "tslint --project tsconfig.json",
     "cov": "egg-bin cov",
-    "ci": "yarn lint && npm run cov && tsc  --build tsconfig.build.json"
+    "ci": "yarn lint && npm run cov && tsc  --build tsconfig.build.json",
+    "commits": "bash ./scripts/commits.sh"
   },
   "config": {
     "commitizen": {
