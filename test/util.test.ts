@@ -62,6 +62,7 @@ describe('test utils', () => {
               { label: '类型', key: 'types' },
               { label: '默认值', key: 'default' }
             ],
+            exclude: ['a', 'b'],
             language: '1'
           })
         ),
@@ -74,6 +75,7 @@ describe('test utils', () => {
             { label: '类型', key: 'types' },
             { label: '默认值', key: 'default' }
           ],
+          exclude: ['a', 'b'],
           language: '1'
         }
       );

@@ -3,6 +3,7 @@ export interface ITableConfig {
   interfaceName: string;
   language: string;
   columnNames?: IColumn[];
+  exclude?: string[];
 }
 
 export interface IColumn {
@@ -13,7 +14,7 @@ export interface IColumn {
 export function parserTableConfig(tableConfig: string): ITableConfig {
   const config: ITableConfig = JSON.parse(tableConfig);
 
-  const { filePath, interfaceName, columnNames, language } = config;
+  const { filePath, interfaceName, columnNames, language, exclude } = config;
 
   if (!filePath) {
     throw new Error('filePath is required');
@@ -32,6 +33,9 @@ export function parserTableConfig(tableConfig: string): ITableConfig {
       { label: 'Type', key: 'types' },
       { label: 'Default', key: 'default' }
     ];
+  }
+  if (Array.isArray(exclude) && exclude.length > 0) {
+    result.exclude = exclude;
   }
   return result;
 }

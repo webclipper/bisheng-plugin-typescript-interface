@@ -26,14 +26,18 @@ export = (
             language,
             filePath,
             interfaceName,
-            columnNames
+            columnNames,
+            exclude
           } = parserTableConfig(node[2][1]);
-          const fields = parserTsInterfaceDeclaration(
+          let fields = parserTsInterfaceDeclaration(
             readInterfaceAstByName(
               path.resolve(process.cwd(), filePath),
               interfaceName
             )
           );
+          if (exclude && exclude.length > 0) {
+            fields = fields.filter(o => exclude.indexOf(o.name) === -1);
+          }
           return MT(
             jsonToMarkdownTable(
               fields.map(o => getFieldMetaByLanguage(o, language)),
