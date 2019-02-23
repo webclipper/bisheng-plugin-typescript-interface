@@ -1,21 +1,23 @@
-## [1.0.5](https://github.com/yuquewebclipper/bisheng-plugin-typescript-interface/compare/v1.0.4...v1.0.5) (2019-02-22)
+## [1.0.6](https://github.com/yuquewebclipper/bisheng-plugin-typescript-interface/compare/v1.0.5...v1.0.6) (2019-02-23)
+
+
+### Bug Fixes
+
+* update test case ([c7ba733](https://github.com/yuquewebclipper/bisheng-plugin-typescript-interface/commit/c7ba733))
+
+
+### Features
+
+* support exclude fields ([a02b086](https://github.com/yuquewebclipper/bisheng-plugin-typescript-interface/commit/a02b086))
 
 
 
-## [1.0.4](https://github.com/yuquewebclipper/bisheng-plugin-typescript-interface/compare/v1.0.3...v1.0.4) (2019-02-22)
+## [1.0.5](https://github.com/yuquewebclipper/bisheng-plugin-typescript-interface/compare/v1.0.1...v1.0.5) (2019-02-22)
 
 
 ### Bug Fixes
 
 * throw error when file use classProperties ([66ed96b](https://github.com/yuquewebclipper/bisheng-plugin-typescript-interface/commit/66ed96b))
-
-
-
-## [1.0.3](https://github.com/yuquewebclipper/bisheng-plugin-typescript-interface/compare/v1.0.2...v1.0.3) (2019-02-22)
-
-
-
-## [1.0.2](https://github.com/yuquewebclipper/bisheng-plugin-typescript-interface/compare/v1.0.1...v1.0.2) (2019-02-22)
 
 
 
