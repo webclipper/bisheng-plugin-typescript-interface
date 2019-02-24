@@ -6,26 +6,56 @@ export interface ITableConfig {
   exclude?: string[];
 }
 
+export interface IPluginTableConfig {
+  base: {
+    columnNames?: IColumn[];
+    exclude?: string[];
+  };
+  i18n: {
+    [language: string]: {
+      columnNames?: IColumn[];
+      exclude?: string[];
+    };
+  };
+}
+
 export interface IColumn {
   label: string;
   key: string;
 }
 
-export function parserTableConfig(tableConfig: string): ITableConfig {
+export function parserTableConfig(
+  tableConfig: string,
+  encodeConfig?: string
+): ITableConfig {
   const config: ITableConfig = JSON.parse(tableConfig);
-
   const { filePath, interfaceName, columnNames, language, exclude } = config;
-
   if (!filePath) {
     throw new Error('filePath is required');
   }
   if (!interfaceName) {
     throw new Error('interfaceName is required');
   }
-
   const result: ITableConfig = { filePath, interfaceName, language };
-  if (Array.isArray(columnNames) && columnNames.length > 0) {
-    result.columnNames = columnNames;
+  if (encodeConfig) {
+    let pluginTableConfig: IPluginTableConfig = {
+      base: {},
+      i18n: {}
+    };
+    try {
+      pluginTableConfig = JSON.parse(
+        Buffer.from(encodeConfig, 'base64').toString()
+      );
+    } catch (error) {
+      throw new Error('decode plugin config error');
+    }
+    const pluginTableConfigByLanguage = Object.assign(
+      {},
+      pluginTableConfig.base,
+      pluginTableConfig.i18n[language]
+    );
+    result.columnNames = pluginTableConfigByLanguage.columnNames;
+    result.exclude = pluginTableConfigByLanguage.exclude;
   } else {
     result.columnNames = [
       { label: 'Property', key: 'name' },
@@ -34,7 +64,10 @@ export function parserTableConfig(tableConfig: string): ITableConfig {
       { label: 'Default', key: 'default' }
     ];
   }
-  if (Array.isArray(exclude) && exclude.length > 0) {
+  if (Array.isArray(columnNames) && columnNames.length > 0) {
+    result.columnNames = columnNames;
+  }
+  if (Array.isArray(exclude)) {
     result.exclude = exclude;
   }
   return result;

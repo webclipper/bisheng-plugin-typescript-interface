@@ -1,8 +1,75 @@
+import { IPluginTableConfig } from './../src/utils';
 import assert = require('power-assert');
 import { parserTableConfig, jsonToMarkdownTable } from '../src/utils';
 
 describe('test utils', () => {
   describe('test parserTableConfig', () => {
+    const pluginConfig: IPluginTableConfig = {
+      base: {
+        exclude: ['children']
+      },
+      i18n: {
+        'zh-CN': {
+          columnNames: [{ label: '中文', key: 'name' }]
+        }
+      }
+    };
+
+    const encodeConfig = (config: IPluginTableConfig) => {
+      return Buffer.from(JSON.stringify(config)).toString('base64');
+    };
+
+    describe('test encodeConfig in parserTableConfig', () => {
+      it('exclude should be equal to pluginConfig when exclude is undefined', () => {
+        assert.deepEqual(
+          parserTableConfig(
+            JSON.stringify({
+              filePath: '1',
+              interfaceName: '2'
+            }),
+            encodeConfig(pluginConfig)
+          ).exclude,
+          pluginConfig.base.exclude
+        );
+        assert.deepEqual(
+          parserTableConfig(
+            JSON.stringify({
+              filePath: '1',
+              interfaceName: '2',
+              exclude: []
+            }),
+            encodeConfig(pluginConfig)
+          ).exclude,
+          []
+        );
+      });
+      it('should equal to pluginConfig.i18n[\'zh-CN\'].columnNames when language is zh-CN', () => {
+        assert.deepEqual(
+          parserTableConfig(
+            JSON.stringify({
+              filePath: '1',
+              interfaceName: '2',
+              language: 'zh-CN'
+            }),
+            encodeConfig(pluginConfig)
+          ).columnNames,
+          pluginConfig.i18n['zh-CN'].columnNames
+        );
+        assert.deepEqual(
+          parserTableConfig(
+            JSON.stringify({
+              filePath: '1',
+              interfaceName: '2',
+              language: 'zh-CN',
+              columnNames: [{ label: '自定义', key: 'name' }]
+            }),
+            encodeConfig(pluginConfig)
+          ).columnNames,
+          [{ label: '自定义', key: 'name' }]
+        );
+      });
+    });
+
     it('should throw error when filePath is undefined', () => {
       assert.throws(() => {
         parserTableConfig('{}');
@@ -17,7 +84,17 @@ describe('test utils', () => {
         );
       }, /interfaceName is required/);
     });
-    it('should should be default value when columnNames is empty', () => {
+    it('should throw error when plugin config is error', () => {
+      const config = JSON.stringify({
+        filePath: '1',
+        interfaceName: '2'
+      });
+      assert.throws(() => {
+        parserTableConfig(config, 'error');
+      }, /decode plugin config error/);
+    });
+
+    it('should be default value when columnNames is empty', () => {
       assert.deepEqual(
         parserTableConfig(
           JSON.stringify({

@@ -9,11 +9,12 @@ import * as path from 'path';
 
 interface IPluginConfig {
   lang?: string;
+  encodeConfig?: string;
 }
 
 export = (
   markdownData: any,
-  { lang = 'typescriptInterface' }: IPluginConfig
+  { lang = 'typescriptInterface', encodeConfig }: IPluginConfig
 ) => {
   const { content } = markdownData;
   if (Array.isArray(content)) {
@@ -28,7 +29,8 @@ export = (
             interfaceName,
             columnNames,
             exclude
-          } = parserTableConfig(node[2][1]);
+          } = parserTableConfig(node[2][1], encodeConfig);
+
           let fields = parserTsInterfaceDeclaration(
             readInterfaceAstByName(
               path.resolve(process.cwd(), filePath),
