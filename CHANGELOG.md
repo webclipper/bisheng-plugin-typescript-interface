@@ -1,3 +1,12 @@
+## [1.1.1](https://github.com/yuquewebclipper/bisheng-plugin-typescript-interface/compare/v1.0.6...v1.1.1) (2019-02-24)
+
+
+### Features
+
+* support encodeConfig ([7a2960b](https://github.com/yuquewebclipper/bisheng-plugin-typescript-interface/commit/7a2960b))
+
+
+
 ## [1.0.6](https://github.com/yuquewebclipper/bisheng-plugin-typescript-interface/compare/v1.0.5...v1.0.6) (2019-02-23)
 
 
